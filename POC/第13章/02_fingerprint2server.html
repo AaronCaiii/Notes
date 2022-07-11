@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<title>Blank Page</title>
+</head>
+<body>
+<h1>You have been given the finger!</h1>
+<script src="fingerprint2.js"></script>
+<script>
+var d1 = new Date();
+var options = {};
+Fingerprint2.get(options, function (components) {
+    var values = components.map(function (component) { return component.value; });
+    var murmur = Fingerprint2.x64hash128(values.join(''), 31);
+    var clientfp = "Client browser fingerprint: " + murmur + "\n\n";
+    var d2 = new Date();
+    var timeString = "Time to calculate the fingerprint: " + (d2 - d1) + "ms\n\n";
+    var details = "Detailed information: \n";
+    if (typeof window.console !== "undefined") {
+        for (var index in components) {
+            var obj = components[index];
+            var value = obj.value;
+            if (value !== null) {
+                var line = obj.key + " = " + value.toString().substr(0, 150);
+                details += line + "\n";
+            }
+        }
+}
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.open("POST", "/fp/js.php");
+xmlhttp.setRequestHeader("Content-Type", "application/txt");
+xmlhttp.send(clientfp + timeString + details);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<title>Fingerprintjs3 test</title>
+</head>
+<body>
+<h1>Fingerprintjs3</h1>
+
+<p>Your browser fingerprint: <strong id="fp"></strong></p>
+<p><code id="time"/></p>
+<p><span id="userAgent"/></p>
+<p><span id="details"/></p>
+
+<script src="polyfill.min.js"></script>
+<script
+async
+src="fp.min.js"
+onload="initFingerprintJS()"
+></script>
+
+<script>
+
+function initFingerprintJS() {
+    const d1 = new Date();
+
+    FingerprintJS.load().then(function (fp) {
+        fp.get().then(function (result) {
+
+            const d2 = new Date();
+
+            const visitorId = result.visitorId;
+            const userAgentString = "<strong>User Agent: </strong>  " + navigator.userAgent;
+            const timeString = "Time to calculate the fingerprint: " + (d2 - d1) + "ms";
+
+            var details = "<strong>Detailed information: </strong><br />";
+            if(typeof window.console !== "undefined") {
+                for (var index in result.components) {
+                    const obj = result.components[index];
+                    const value = obj.value;
+                    if (value) {
+                        const line = index + " = " + JSON.stringify(value).substr(0, 150);
+                        details += line + "<br />";
+                    }
+                }
+            }
+
+            document.querySelector("#details").innerHTML = details
+            document.querySelector("#userAgent").innerHTML = userAgentString;
+            document.querySelector("#fp").textContent = visitorId
+            document.querySelector("#time").textContent = timeString
+
+        });
+    });
+}
+</script>
+
+</body>
+</html>

