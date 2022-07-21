@@ -126,8 +126,8 @@ Task Completed
 
 ```
 ### web页面元素信息发现
-![Img](./FILES/natraj.md/img-20220721123139.png)
-![Img](./FILES/natraj.md/img-20220721123154.png)
+![IMG](../FILES/natraj.md/img-20220721123139.png)
+![IMG](../FILES/natraj.md/img-20220721123154.png)
 ### 文件包含漏洞
 ```
 发现file文件, 尝试使用ffuf进行fuzz
@@ -160,12 +160,12 @@ file                    [Status: 200, Size: 1398, Words: 9, Lines: 28, Duration:
 发现存在文件包含漏洞
 ```
 
-![Img](./FILES/natraj.md/img-20220721124057.png)
-![Img](./FILES/natraj.md/img-20220721123732.png)
+![IMG](../FILES/natraj.md/img-20220721124057.png)
+![IMG](../FILES/natraj.md/img-20220721123732.png)
 查看默认日志目录下的auth.log, 发现记录了访问日志
-![Img](./FILES/natraj.md/img-20220721124220.png)
+![IMG](../FILES/natraj.md/img-20220721124220.png)
 >尝试ssh登录, 无所谓用户名, 不知道用户名和密码
-![Img](./FILES/natraj.md/img-20220721133722.png)
+![IMG](../FILES/natraj.md/img-20220721133722.png)
 >可以发现用户名在此显示
 
 #### 利用LFI和local日志获取反弹shell
@@ -205,7 +205,7 @@ Connection: close
 
 ```
 
-![Img](./FILES/natraj.md/img-20220721133323.png)
+![IMG](../FILES/natraj.md/img-20220721133323.png)
 
 ### 提权
 > 本地使用python运行http服务, 从远程拷贝linpeas.sh
@@ -346,7 +346,7 @@ User ${APACHE_RUN_USER}
 Group ${APACHE_RUN_GROUP}
 这里的user和group没有被定义, 把apache2.conf放到本地然后修改成另一个用户, 去尝试提权
 ```
-![Img](./FILES/natraj.md/img-20220721135431.png)
+![IMG](../FILES/natraj.md/img-20220721135431.png)
 ```
 http://192.168.146.63/apache2.conf
 www-data@ubuntu:/tmp$ cp apache2.conf /etc/apache2/apache2.conf
