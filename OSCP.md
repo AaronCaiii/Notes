@@ -975,4 +975,79 @@ cat /etc/passwd
 ### 2. web渗透
  - 手动浏览主页
  - web应用枚举
-### 3. 
+
+
+---
+## 7/20/2022 Lesson
+### 侦查
+```
+寻找内网DNS服务器
+sudo nmap -p53 -sU xxx.xxx.xxx.xxx/24 --open --reason | grep "xxx.xxx.xxx." |awk '{print $5}' >> dns.txt
+// 针对udp 53端口
+
+解析域名
+for ip in $(cat "dns.txt");do host xxx.xxx.xxx.xxx $ip; done | grep -v "not found"
+for ip in $(cat dns-servers); do nslookup xxx.xxx.xxx.xxx $ip; done
+
+区域传输
+dnsrecon -d xxx.com -n ip -t axfr
+```
+### 快速扫描
+```
+nmap xxx.xxx.xxx.xxx --top-ports 10 --open
+```
+### 全端口扫描
+```
+sudo nmap -p1-1000 ip
+
+nmap ip -p- -sV --reason --dns-server ip
+
+sudo nmap -p1-1000 ip
+
+sudo -pports -sV ip
+```
+### udp扫描
+```
+sudo nmap -p- -sU ip
+```
+### 扫描服务
+```
+nc -nv ip port
+```
+### ssh脚本扫描
+```
+nmap ip -p 22 -sV --script=ssh-hostkey
+```
+### WEB服务/应用
+```
+获取信息
+curl -i -L ip
+gobuster -u http://url/ -w wordlists -s 'status codes' -e
+// 类似的:dirb dirbuster gobuster dirsearch
+```
+### 搜索漏洞
+```
+searchsploit
+```
+### 寻找可以修改的文件
+```
+find / type f -user root -perm -o=w 2>/dev/null
+```
+### rbash绕过
+- 编程语言
+- 系统的/bin/sh
+- bash -i
+
+### 压缩包密码爆破
+```
+fcrackzip -u -D -p wordlists file
+```
+### ssh私钥登陆
+```
+ssh -i file username@ip
+```
+### 查找有suid权限的文件
+```
+find / -perm -4000 -type f 2>/dev/null
+```
+
