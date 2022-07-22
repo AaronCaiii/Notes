@@ -409,7 +409,7 @@ root@lampiao:~# id
 uid=0(root) gid=0(root) groups=0(root)
 root@lampiao:~# 
 ```
-![Img](./FILES/lampiao.md/img-20220722114259.png)
+![Img](../FILES/lampiao.md/img-20220722114259.png)
 
 
 
