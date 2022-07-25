@@ -113,7 +113,7 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
 ![Img](../FILES/Cute.md/img-20220725114835.png)
 发现底部的版本号为2.1.2, google搜一下
 ![Img](../FILES/Cute.md/img-20220725114909.png)
-发现本版本有RCE
+ 发现本版本有RCE
 #### 漏洞利用
 ```
 └─$ searchsploit cutenews 2.1.2
