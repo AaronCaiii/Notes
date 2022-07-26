@@ -208,7 +208,7 @@ Connection: close
 ![IMG](../FILES/natraj.md/img-20220721133323.png)
 
 ### 提权
-> 本地使用python运行http服务, 从远程拷贝linpeas.sh
+> 本地使用python运行http服务, 从远程拷贝linpeas
 ```
 $ /usr/bin/script -qc /bin/bash /dev/null
 www-data@ubuntu:/tmp$ ls

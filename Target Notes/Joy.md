@@ -1,4 +1,4 @@
-# 192.168.146.62
+# Joy
 ## 信息收集阶段
 ### NMAP
 ```
@@ -228,10 +228,10 @@ Lock down this machine!
 > 在目前以上的信息暂时没有用, 继续往下探索
 访问一下web界面看看
 
-![Img](../FILES/192.168.146.62.md/img-20220714143305.png)
+![Img](../FILES/Joy/img-20220714143305.png)
 >有一个ossec目录, 点进去是一个事件管理平台
 
-![Img](../FILES/192.168.146.62.md/img-20220714143417.png)
+![Img](../FILES/Joy/img-20220714143417.png)
 
 > 通过左上角的logo可以看到这是一个OSSEC的平台, 并且版本为0.8, 那我们searchsploit看看有没有什么可利用的漏洞
 > 诶, 有的
@@ -549,10 +549,10 @@ Dockerfile  exploit.py  LICENSE  main.sh  README.md
 ```
 *It's working!!!*
 >接下来试试输入命令
-![Img](./FILES/192.168.146.62.md/img-20220714150445.png)
+![Img](./FILES/Joy/img-20220714150445.png)
 >有回显
 试试nc
-![Img](./FILES/192.168.146.62.md/img-20220714150525.png)
+![Img](./FILES/Joy/img-20220714150525.png)
 nc并没有回显, 那就只能用php了
 
 >先在本地起个监听

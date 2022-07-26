@@ -129,15 +129,15 @@ Target: https://192.168.146.52/
 ## Web枚举
 >拿到admin的后台目录
 
-![Img](../FILES/192.168.146.52.md/img-20220715111910.png)
+![Img](../FILES/FALL/img-20220715111910.png)
 >sql注入无果
 
 >assets里面的文件夹均没有文件
 
-![Img](../FILES/192.168.146.52.md/img-20220715112000.png)
+![Img](../FILES/FALL/img-20220715112000.png)
 
 >doc没有返回任何信息
-![Img](../FILES/192.168.146.52.md/img-20220715112225.png)
+![Img](../FILES/FALL/img-20220715112225.png)
 >只有注释带有一句DUMMY HTML File
 
 >phpinfo.php也同样没有返回信息
@@ -146,7 +146,7 @@ robots.php返回File not Found
 >但是
 访问test.php的时候
 告诉我Missing GET parameter
-![Img](./FILES/192.168.146.52.md/img-20220715112425.png)
+![Img](../FILES/FALL/img-20220715112425.png)
 那就试试ffuf
 
 >ffuf是一款web fuzzer的工具, 用起来就是一个字"快"
@@ -192,7 +192,7 @@ file                    [Status: 200, Size: 1633, Words: 36, Lines: 33, Duration
 ```
 https://192.168.146.52/test.php?file=/etc/passwd
 ```
-![Img](./FILES/192.168.146.52.md/img-20220715115848.png)
+![Img](../FILES/FALL/img-20220715115848.png)
 >curl到本地
 ```
 http://192.168.146.52/test.php?file=/etc/passwd
@@ -204,7 +204,7 @@ http://192.168.146.52/test.php?file=/etc/passwd
     
 ```
 >并没有回显, 从网页上获取一下信息
-![Img](./FILES/192.168.146.52.md/img-20220715120726.png)
+![Img](../FILES/FALL/img-20220715120726.png)
 有一个posted by qiu, 这个用户可能是一个突破点
 ```
 ┌──(aacai㉿kali)-[~/Desktop/192.168.146.52]
