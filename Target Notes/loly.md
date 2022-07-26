@@ -66,9 +66,9 @@ Task Completed
 
 ```
 ## Web信息收集
-![Img](../FILES/loly.md/img-20220726145442.png)
+![Img](../FILES/loly/img-20220726145442.png)
 查看到wordpress界面之后, 还有很多部分的信息还没加载出来, 查看一下源码
-![Img](../FILES/loly.md/img-20220726145510.png)
+![Img](../FILES/loly/img-20220726145510.png)
 发现有一个域名地址, 加入到/etc/hosts里面
 ```
 └─$ cat /etc/hosts        
@@ -81,7 +81,7 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 
 ```
-![Img](../FILES/loly.md/img-20220726150651.png)
+![Img](../FILES/loly/img-20220726150651.png)
 ### WORDPRESS信息收集
 ```
 └─$ sudo wpscan  --url "http://loly.lc/wordpress/"
@@ -268,16 +268,16 @@ Trying loly / fernando Time: 00:00:14 <=                                        
  | Username: loly, Password: fernando
 ```
 跑出来了密码
-![Img](../FILES/loly.md/img-20220726152243.png)
+![Img](../FILES/loly/img-20220726152243.png)
 登录上来有一个邮箱, 先记下来
 *Current administration email: loly@mail.com*
 ### 文件上传
-![Img](../FILES/loly.md/img-20220726155031.png)
+![Img](../FILES/loly/img-20220726155031.png)
 发现adrotate
-![Img](../FILES/loly.md/img-20220726155119.png)
+![Img](../FILES/loly/img-20220726155119.png)
 查看描述说: Zip文件会被自动解压到目录, 并且原来的zip文件会被删除
 上传一个shell.php.zip
-![Img](../FILES/loly.md/img-20220726155156.png)
+![Img](../FILES/loly/img-20220726155156.png)
 访问后获得www-data权限
 ```
 └─$ nc -lvnp 4444             
@@ -562,7 +562,7 @@ cat root.txt
 Congratulations. I'm BigCityBoy
 # 
 ```
-![Img](../FILES/loly.md/img-20220726162146.png)
+![Img](../FILES/loly/img-20220726162146.png)
 
 
 
