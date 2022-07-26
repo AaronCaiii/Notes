@@ -212,10 +212,10 @@ Nmap done: 1 IP address (1 host up) scanned in 38.76 seconds
 
 ```
 ### web页面信息收集
-![Img](../FILES/lampiao.md/img-20220722104218.png)
+![Img](../FILES/lampiao/img-20220722104218.png)
 基于Drupal
-![Img](../FILES/lampiao.md/img-20220722104516.png)
-最新版本为Drupal 7.54
+![Img](../FILES/lampiao/img-20220722104516.png)
+##### 最新版本为Drupal 7.54
 ### 搜索漏洞
 ```
 ┌──(aacai㉿kali)-[~/Desktop/gooann/Week1/lampiao]
@@ -255,10 +255,10 @@ Copied to: /home/aacai/Desktop/gooann/Week1/lampiao/41564.php
 41564.php  diresarch_res.txt
 
 ```
-![Img](../FILES/lampiao.md/img-20220722105052.png)
-并没有找到这个目录
-![Img](../FILES/lampiao.md/img-20220722105436.png)
-![Img](../FILES/lampiao.md/img-20220722105459.png)
+![Img](../FILES/lampiao/img-20220722105052.png)
+##### 并没有找到这个目录
+![Img](../FILES/lampiao/img-20220722105436.png)
+![Img](../FILES/lampiao/img-20220722105459.png)
 ### 使用metasploit
 ```
 msf6 > use exploit/unix/webapp/drupal_drupalgeddon2 
@@ -409,7 +409,7 @@ root@lampiao:~# id
 uid=0(root) gid=0(root) groups=0(root)
 root@lampiao:~# 
 ```
-![Img](../FILES/lampiao.md/img-20220722114259.png)
+![Img](../FILES/lampiao/img-20220722114259.png)
 
 
 
