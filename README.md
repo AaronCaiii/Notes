@@ -6,3 +6,7 @@ For prepare OSCP(Offensive Security Certified Processional) Notes
 ![macOS](https://img.shields.io/badge/macOS-12.4-brightgreen)
 ![Kali](https://img.shields.io/badge/Kali%20Linux-2022.2-lightgrey)
 ![Total](https://img.shields.io/badge/TagetNotes-10-red)
+# Notes directory
+## 中文版本
+
+## English Version
