@@ -1,6 +1,5 @@
 ## 信息收集阶段
 ### Nmap
-> 好家伙上来就一堆信息
 ```
 └─$ sudo nmap -A -sV -T4 -p- 192.168.146.74
 Starting Nmap 7.91 ( https://nmap.org ) at 2022-07-14 11:33 HKT
