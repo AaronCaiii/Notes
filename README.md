@@ -6,8 +6,9 @@ For prepare OSCP(Offensive Security Certified Processional) Notes
 ![VMware](https://img.shields.io/badge/VMware%20ESXI-7.0-orange)
 ![macOS](https://img.shields.io/badge/macOS-12.4-brightgreen)
 ![Kali](https://img.shields.io/badge/Kali%20Linux-2022.2-lightgrey)
-![Total](https://img.shields.io/badge/TagetNotes-10-red)
+
 # Notes directory
+![Total](https://img.shields.io/badge/TagetNotes-10-red)
 ## 中文版本
 
 - [Cute](https://github.com/AaronCaiii/Notes/blob/main/Target%20Notes/Cute.md)
