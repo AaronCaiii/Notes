@@ -61,3 +61,8 @@ For prepare OSCP(Offensive Security Certified Processional) Notes
 - oscp-voucher
   - [中文](https://aaroncaiii.github.io/Target%20Notes/oscp)
   - [Download oscp-voucher](https://download.vulnhub.com/infosecprep/oscp.zip)
+
+### 4.Augest-9.Augest
+- Seppuku
+  - [中文](https://aaroncaiii.github.io/Target%20Notes/Seppuku)
+  - [Download Sepuku](https://download.vulnhub.com/seppuku/Seppuku.zip)
