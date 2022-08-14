@@ -8,7 +8,7 @@ For prepare OSCP(Offensive Security Certified Processional) Notes
 ![Kali](https://img.shields.io/badge/Kali%20Linux-2022.2-lightgrey)
 
 # Notes directory
-![Total](https://img.shields.io/badge/TargetNotes-14-blueviolet)
+![Total](https://img.shields.io/badge/TargetNotes-19-blueviolet)
 ### 21.July-26.July
 - Cute
   - [中文](https://aaroncaiii.github.io/Target%20Notes/Cute)
