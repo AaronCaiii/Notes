@@ -66,3 +66,16 @@ For prepare OSCP(Offensive Security Certified Processional) Notes
 - Seppuku
   - [中文](https://aaroncaiii.github.io/Target%20Notes/Seppuku)
   - [Download Sepuku](https://download.vulnhub.com/seppuku/Seppuku.zip)
+### 11.Augest-16.Augest
+- Inclusiveness
+  - [中文](https://aaroncaiii.github.io/Target%20Notes/inclusiveness)
+  - [Download](https://download.vulnhub.com/inclusiveness/Inclusiveness.ova)
+- Geisha
+  - [中文](https://aaroncaiii.github.io/Target%20Notes/Geisha)
+  - [Download](https://download.vulnhub.com/geisha/Geisha.zip)
+- Photographer
+  - [中文](https://aaroncaiii.github.io/Target%20Notes/photographer)
+  - [Download](https://download.vulnhub.com/photographer/Photographer.ova)
+- wpwnvm
+  - [中文](https://aaroncaiii.github.io/Target%20Notes/wpwnvm)
+  - [Download](https://download.vulnhub.com/wpwn/wpwnvm.zip)
